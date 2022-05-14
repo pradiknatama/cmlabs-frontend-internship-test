@@ -16,10 +16,10 @@
                     <router-link class="nav-link a" to="/">Home</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link a" to="/category">Food</router-link>
+                    <router-link class="nav-link a" to="/">Food</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link a" to="/detail/1">Ingredient</router-link>
+                    <router-link class="nav-link a" to="/">Ingredient</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link class="nav-link a" to="/">Local Culinary</router-link>

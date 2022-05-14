@@ -4,63 +4,54 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
         <li class="breadcrumb-item"><a href="#">Food</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Beef</li>
+        <li class="breadcrumb-item active" aria-current="page">
+          {{ $route.params.categoryName }}
+        </li>
       </ol>
     </nav>
     <div class="row row-cols-2 row-cols-md-4 g-4">
-      <div class="col" v-for="(category, index) in categories" :key="index">
-        <router-link
-          class="nav-link a"
-          :to="{
-            name: 'CategoryDetail',
-            params: { categoryName: category.strCategory },
-          }"
-        >
-          <div class="col">
-            <div class="image">
-              <img
-                class="image__img"
-                :src="category.strCategoryThumb"
-                alt="Category"
-              />
-              <div class="image__overlay image__overlay">
-                <div class="image__title">{{ category.strCategory }}</div>
-              </div>
+      <div class="col" v-for="product in info" :key="product.id">
+      
+        <router-link class="nav-link a" :to="{name:'Detail',params:{id:product.idMeal}}">
+        <div class="col">
+          <div class="image">
+            <img
+              class="image__img"
+              :src="product.strMealThumb"
+              alt="Category"
+            />
+            <div class="image__overlay image__overlay">
+              <div class="image__title">{{product.strMeal}}</div>
             </div>
           </div>
+        </div>
         </router-link>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import axios from "axios";
-import { reactive, ref } from "vue";
-import {useRouter, useRoute} from 'vue-router';
-export default {
-  name: "CategoryDetailView",
-  setup() {
-    //data binding
-    let cateDetail = ref([]);
 
-    onMounted(() => {
-      axios
-        .get("https://www.themealdb.com/api/json/v1/1/categories.php")
-        .then((result) => {
-          categories.value = result.data.categories;
-          console.log("succsess:", result.data);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
-    });
+export default {
+  name: "FoodDetail",
+
+  data() {
     return {
-      categories,
+      info: null,
     };
+  },
+  mounted() {
+    axios
+      .get(
+        "https://www.themealdb.com/api/json/v1/1/filter.php?c=" +
+          this.$route.params.categoryName
+      )
+      .then((response) => (this.info = response.data.meals));
   },
 };
 </script>
+
 <style>
 .image {
   position: relative;
@@ -86,6 +77,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align:center;
   opacity: 1;
   padding-bottom: 60px;
   transition: opacity 0.25s;
