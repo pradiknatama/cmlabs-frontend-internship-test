@@ -23,7 +23,7 @@
     </h1>
   </div>
   <div class="container px-5">
-    <div class="row row-cols-2 row-cols-md-4 g-4">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
       <div class="col" v-for="(category, index) in categories" :key="index">
       <router-link class="nav-link a" :to="{name:'CategoryDetail',params:{categoryName:category.strCategory}}">
         <div class="col">
@@ -58,7 +58,6 @@ export default {
         .get("https://www.themealdb.com/api/json/v1/1/categories.php")
         .then((result) => {
           categories.value = result.data.categories;
-          console.log("succsess:", result.data);
         })
         .catch((err) => {
           console.log(err.response);
@@ -101,6 +100,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align:center;
   opacity: 1;
   padding-bottom: 60px;
   transition: opacity 0.25s;

@@ -1,18 +1,20 @@
 <template>
-  <div class="container px-5">
-    <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+  <div class="container px-5 pt-3">
+    <nav style=" --bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><router-link  to="/">Home</router-link></li>
         <li class="breadcrumb-item"><a href="#">Food</a></li>
         <li class="breadcrumb-item active" aria-current="page">
           {{ $route.params.categoryName }}
+          
         </li>
       </ol>
     </nav>
-    <div class="row row-cols-2 row-cols-md-4 g-4">
-      <div class="col" v-for="product in info" :key="product.id">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 ">
+
+      <div class="col " v-for="product in info" :key="product.id">
       
-        <router-link class="nav-link a" :to="{name:'Detail',params:{id:product.idMeal}}">
+        <router-link class="nav-link a" :to="{name:'DetailMeal',params:{mealId:product.idMeal}}">
         <div class="col">
           <div class="image">
             <img
@@ -34,7 +36,7 @@
 import axios from "axios";
 
 export default {
-  name: "FoodDetail",
+  name: "CategoryDetailView",
 
   data() {
     return {
@@ -53,6 +55,13 @@ export default {
 </script>
 
 <style>
+.breadcrumb-item a{
+    text-decoration:none;
+    color:black;
+}
+.breadcrumb-item .active a {
+    color:#9A9A9A;
+}
 .image {
   position: relative;
   width: 100%;

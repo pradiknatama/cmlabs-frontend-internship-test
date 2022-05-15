@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createWebHistory ,createRouter} from "vue-router";
 import Home from "@/views/Home"
 import Detail from "@/views/Detail"
 import Category from "@/views/Category"
@@ -15,8 +15,8 @@ const routes=[
         component:Category
     },
     {
-        path:'/detail/:id',
-        name:'Detail',
+        path:'/detail/meal/:mealId',
+        name:'DetailMeal',
         component:Detail
     },
 ];
